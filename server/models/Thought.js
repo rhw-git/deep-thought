@@ -8,27 +8,27 @@ const thoughtSchema = new Schema(
       type: String,
       required: 'You need to leave a thought!',
       minlength: 1,
-      maxlength: 280
+      maxlength: 280,
     },
     createdAt: {
       type: Date,
       default: Date.now,
-      get: timestamp => moment(timestamp).format('MMM Do, YYYY [at] hh:mm a')
+      get: (timestamp) => moment(timestamp).format('MMM Do, YYYY [at] hh:mm a'),
     },
     username: {
       type: String,
-      required: true
+      required: true,
     },
-    reactions: [reactionSchema]
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
-      getters: true
-    }
-  }
+      getters: true,
+    },
+  },
 );
 
-thoughtSchema.virtual('reactionCount').get(function() {
+thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });
 

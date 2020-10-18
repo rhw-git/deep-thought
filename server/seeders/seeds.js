@@ -28,7 +28,9 @@ db.once('open', async () => {
     let friendId = userId;
 
     while (friendId === userId) {
-      const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
+      const randomUserIndex = Math.floor(
+        Math.random() * createdUsers.ops.length,
+      );
       friendId = createdUsers.ops[randomUserIndex];
     }
 
@@ -47,7 +49,7 @@ db.once('open', async () => {
 
     const updatedUser = await User.updateOne(
       { _id: userId },
-      { $push: { thoughts: createdThought._id } }
+      { $push: { thoughts: createdThought._id } },
     );
 
     createdThoughts.push(createdThought);
@@ -60,16 +62,19 @@ db.once('open', async () => {
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { username } = createdUsers.ops[randomUserIndex];
 
-    const randomThoughtIndex = Math.floor(Math.random() * createdThoughts.length);
+    const randomThoughtIndex = Math.floor(
+      Math.random() * createdThoughts.length,
+    );
     const { _id: thoughtId } = createdThoughts[randomThoughtIndex];
 
     await Thought.updateOne(
       { _id: thoughtId },
       { $push: { reactions: { reactionBody, username } } },
-      { runValidators: true }
+      { runValidators: true },
     );
   }
 
   console.log('all done!');
+  console.log(Thought);
   process.exit(0);
 });
