@@ -1,6 +1,7 @@
 const { User, Thought } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const { findByIdAndUpdate } = require('../models/User');
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
@@ -85,6 +86,17 @@ const resolvers = {
         return updatedThought;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    addFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { friends: friendId } },
+          { new: true },
+        ).populate('friends');
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to login to add a new friend');
     },
   },
 };
