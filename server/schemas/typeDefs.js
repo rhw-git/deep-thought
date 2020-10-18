@@ -9,6 +9,7 @@ const typeDefs = gql`
     createdAt: String
     username: String
     reactions: [Reaction]
+    reactionCount: Int
   }
   type Reaction {
     _id: ID
@@ -23,6 +24,7 @@ const typeDefs = gql`
     pasword: String
     thoughts: [Thought]
     friends: [User]
+    friendCount: Int
   }
   type Auth {
     token: ID!
