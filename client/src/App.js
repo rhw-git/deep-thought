@@ -18,7 +18,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 // connect to backend server's
 const client = new ApolloClient({
-  uri: '/graphql',
   request: (operation) => {
     const token = localStorage.getItem('id_token');
     operation.setContext({
