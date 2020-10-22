@@ -6,6 +6,7 @@ import Auth from '../utils/auth';
 // import components
 import ThoughtList from '../components/ThoughtList';
 import FriendList from '../components/FriendList';
+import ThoughtForm from '../components/ThoughtForm';
 const Home = () => {
   //--------- calll for queryies -----------------------//
   // use useQuery hook to make query request to `OUERY_THOUGHTS`
@@ -21,6 +22,11 @@ const Home = () => {
   return (
     <main>
       <div className="flex-row justify-space-between">
+        {loggedIn && (
+          <div className="col-12 mb-3">
+            <ThoughtForm />
+          </div>
+        )}
         <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}>
           {loading ? (
             <div>Loading...</div>
