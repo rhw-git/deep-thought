@@ -44,7 +44,7 @@ const ThoughtForm = () => {
         variables: { thoughtText },
       });
 
-      // clear form value
+      // clean form value
       setText('');
       setCharacterCount(0);
     } catch (e) {
